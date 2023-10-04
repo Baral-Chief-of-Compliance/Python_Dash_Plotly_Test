@@ -3,7 +3,7 @@ from dash_extensions.enrich import (DashProxy, ServersideOutputTransform, Multip
 import dash_mantine_components as dmc
 from dash.exceptions import PreventUpdate
 import plotly.express as px
-from database.database import start_db, prepare_data
+from database.database import start_db
 
 CARD_STYLE = dict(withBorder=True,
                   shadow="sm",
@@ -20,7 +20,10 @@ class EncostDash(DashProxy):
 percent_reasons, reason_option, options_for_dropdown, all_records_db = start_db()
 
 app = EncostDash(name=__name__)
-
+pie_chart = px.pie(all_records_db,'reason', hole=.2)
+pie_chart.update_layout(
+    margin=dict(l=20, r=20, t=0, b=170),
+)
 
 
 
@@ -45,8 +48,8 @@ def get_layout():
                                 placeholder="Выберите фильтер",
                                 style={
                                     "width": "80%", 
-                                    "margin-top": "15px",
-                                    "margin-bottom": "15px"
+                                    "marginTop": "15px",
+                                    "marginBottom": "15px"
                                 }
                             ),
                             dmc.Button('Первая кнопка', id='button1'),
@@ -72,7 +75,12 @@ def get_layout():
                                 # ])
                             # html div from wxmaple 
                             html.Div(
-                                dcc.Graph(id='the_graph')
+                                dcc.Graph(
+                                    figure=pie_chart
+                                ),
+                                style={
+                                    "padingBottom": "200px"
+                                }
                             )
                         ],
                         **CARD_STYLE)
@@ -117,19 +125,20 @@ def update_div1(
 #     return fig
 """app calback from example"""
 
-@app.callback(
-        Output(component_id='the_graph', component_property='figure'),
-        [Input(component_id='my_dropdown', component_property='value')]
-)
+# @app.callback(
+#         Output(component_id='the_graph', component_property='figure'),
+#         [Input(component_id='my_dropdown', component_property='value')]
+# )
 
-def update_graph(my_dropdown):
+# def update_graph(my_dropdown):
 
-    piechart = px.pie(
-        
-        hole=.3
-    )
+#     piechart = px.pie(
+#         all_records_db,
+#         'reason',
+#         hole=.2
+#     )
 
-    return piechart
+#     return piechart
 
 
 @app.callback(

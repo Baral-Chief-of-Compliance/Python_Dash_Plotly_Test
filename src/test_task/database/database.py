@@ -7,7 +7,7 @@ def start_db():
     options_for_dropdown = []
 
     con = sqlite3.connect("testDB.db")
-    all_records_db = ps.read_sql("select sources.reason from sources", con)
+    all_records_db = ps.read_sql("select * from sources", con)
     count_all_records = ps.read_sql("select count(sources.reason) as county from sources", con)
     count_all_records = count_all_records['county'][0] 
 
@@ -32,10 +32,10 @@ def start_db():
 
     return percent_reasons, reason_option, options_for_dropdown, all_records_db
 
-def prepare_data():
-    con = sqlite3.connect("testDB.db")
-    all_records_db = ps.read_sql("select * from sources", con)
-    return all_records_db
+# def prepare_data():
+#     con = sqlite3.connect("../testDB.db")
+#     all_records_db = ps.read_sql("select sources.client_name from sources", con)
+#     return all_records_db
 
-data = prepare_data()
-print(data['client_name'])
+# data = prepare_data()
+# print(data['client_name'])
