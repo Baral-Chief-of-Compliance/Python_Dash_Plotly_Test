@@ -25,6 +25,8 @@ pie_chart.update_layout(
     margin=dict(l=20, r=20, t=0, b=170),
 )
 
+histogram = px.bar(all_records_db, x='state_begin', hover_name='reason')
+
 
 
 def get_layout():
@@ -87,7 +89,14 @@ def get_layout():
                 ], span=6),
                 dmc.Col([
                     dmc.Card([
-                        html.Div('Нижняя карточка')],
+                        html.Div('График состояний'),
+                        html.Div(
+                            dcc.Graph(
+                                figure=histogram
+                            )
+                        )
+                        
+                        ],
                         **CARD_STYLE)
                 ], span=12),
             ], gutter="xl",)
