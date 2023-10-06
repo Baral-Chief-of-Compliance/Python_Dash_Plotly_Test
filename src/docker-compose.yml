@@ -1,14 +1,12 @@
 version: '3'
 services:
   dash:
-    build: ./test_task
+    build: ./
     container_name: dash-app
-    network_mode: host
-    environment:
-      - FLASK_ENV=development
-      - PYTHONUNBUFFERED=True 
-    
-    restart: on-failure
+    restart: always
+    networks:
+      - network
+
 
     volumes:
       - ./test_task:/app
@@ -16,4 +14,7 @@ services:
     ports:
       - "8050:8050"
 
-    command: python app.py
+
+networks:
+  network:
+    driver: bridge
