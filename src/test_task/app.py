@@ -31,6 +31,25 @@ def get_layout():
             dmc.Grid([
                 dmc.Col([
                     dmc.Card([
+                            html.H1(
+                                f"Клиент: {db.client_name}"
+                            ),
+                            html.H3(
+                                f"Сменный день: {db.shift_day}"
+                            ),
+
+                            html.H3(
+                                f"Точка учета: {db.endpoint_name}"
+                            ),
+
+                            html.H3(
+                                f"Начало периода: {format(db.state_begin, '%H:%M:%S (%d.%m)')}"
+                            ),
+
+                            html.H3(
+                                f"Конец периода: {format(db.state_end, '%H:%M:%S (%d.%m)')}"
+                            ),
+
                             dcc.Dropdown(
                                 id="filter_dropdown",
                                 options=db.options_for_dropdown,
@@ -104,4 +123,4 @@ def show_value(value, click):
     return fig_gant
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0')
