@@ -1,5 +1,5 @@
 # Python_Dash_Plotly_Test
-### Запсук приложения через docker
+### Запуск приложения через docker
 
 ```console
 docker-compose up --build
