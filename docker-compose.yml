@@ -1,7 +1,7 @@
 version: '3'
 services:
   dash:
-    build: ./
+    build: ./src
     container_name: dash-app
     restart: always
     networks:
@@ -9,7 +9,7 @@ services:
 
 
     volumes:
-      - ./test_task:/app
+      - .src//test_task:/app
 
     ports:
       - "8050:8050"
